@@ -20,12 +20,28 @@ public class WrapperTest {
 		Arrays.sort(int_array);
 		
 		//4将int 类型数组转为字符串
-		txt=int_array.toString();
+		String text=intToStringArray(int_array);
 		
 		System.out.println(Arrays.toString(array));
 		System.out.println(Arrays.toString(int_array));
-		System.out.println(Arrays.toString(txt));
+		//System.out.println((text));
 		
+	}
+
+	public static String intToStringArray(int[] int_array) {
+		StringBuilder text=new StringBuilder();
+		for (int i = 0; i < int_array.length; i++) {	
+			if(i!=int_array.length-1) 
+			{
+				text.append(int_array[i]+" ");	
+			}
+			else if(i==int_array.length-1)
+			{
+				text.append(int_array[i]);	
+			}
+			
+		}
+		return text.toString();
 	}
 
 	public static int[] toIntArray(String[] array) {

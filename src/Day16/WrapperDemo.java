@@ -29,6 +29,7 @@ public class WrapperDemo {
 		 * 			Boolean.parseBoolean("true")
 		 * 			只有char没有parse方法.
 		 * 		2.如果字符串被Integer对象封装，使用intValue()方法来进行转换。
+		 * 			将一个Intger 对象传承基本数据类型
 		 * 
 		 * 		其他进制--->十进制串
 		 * 		parseInt(其他进制的数值,该进制基数)

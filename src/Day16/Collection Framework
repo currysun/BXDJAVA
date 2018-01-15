@@ -1,0 +1,210 @@
+集合类的由来
+	对象是用来封装特有数据，对象多了需要存储，如果对象个数不确定，就使用集合容器进行存储
+	
+集合特点：
+1.用于存储对象的容器。
+2.集合的长度是可变的。
+3.集合不可存储基本数据类型。
+
+框架的顶层接口Collection接口：
+
+Collcetion的常见方法：
+
+1.添加
+	boolean add(Object obj);
+	boolean addAll(Collection col);
+	
+2.删除
+	boolean remove(Object obj);
+	boolean removeAll(Collection col);
+	void clear();
+
+3.判断
+	boolean contains(object obj)
+	boolean containsAll(Collection col)
+	boolean isEmpty()
+	
+4.获取
+	int size();
+	Iterator iterator();取出元素的方式:迭代器
+	
+5.其他
+	boolean retainAll(Collection col);去交集
+	Object[] toArray() 将集合转化为数组
+	
+	
+---------------------------------------------------
+
+Collection
+	|--List：有序（存入和取出的顺序一致），元素都有索引（角标），元素可以重复。
+	|--Set：元素不能重复，无序什。
+	
+重点List
+
+List常见的特有方法：List有一个共性是操作元素角标。	
+
+	1.添加
+	void add(int index, E element) 
+	void addAll(int index, E Collection) 
+		
+	
+	2.删除
+	object remove(index)
+	
+	3.修改
+	object set(index,element)
+	
+	4.获取
+	object get(index)
+	int indexof(object)
+	int lastindexof(object)
+	List subList(fromIndex,endIndex)
+	
+List集合可以完成对元素的增删改查
+
+List:
+	|--Vector:内部是数组数据额结构，是同步的。100%延长，增删查询 都很慢。
+	|--ArrayList：内部是数组数据额结构，是不同步的。替代了Vector 50%延长 查询速度快
+	|--LinkedList：内部是链表数据结构，是不同步的。增删元素的速度很快。
+	
+	
+LinkedList:
+
+		addFirst();
+		addLast();
+		
+		getFirst();//获取不移除，如果链表为空，则报出NoSuchElementException
+		getFirtst();
+		
+		jdk1.6 
+		peekFirst();获取但不移除，如果链表为空，返回null
+		peekLast();
+		
+		
+		
+-----------------------------------------------		
+Set集合：元素不可重复，无序
+	Set接口的方法和Collection中是一样的。
+	|--HashSet： 内部数据结构是哈希表，是不同步的。
+				如何保证该集合的元素唯一性呢？
+				通过对象的hashcode和equals 放发来完成对象唯一性。
+				需要重写HashCode 和equals 方法来使用HashSet
+	
+	|--TreeSet：可以对Set集合中的元素进行排序。是不同步的。
+				判断元素唯一性的方式：根据比较方法返回的结果是否为0，如果是0，那就代表元素相同，不会存储。
+				
+				TreeSet对元素进行排序的方式一：
+				让元素自身具备比较功能，元素就需要实现Comparable接口，覆盖compareTo方法。
+				
+				如果不要按照对象中具备的自然顺序进行排序。如果对象中不具备自然顺序。怎么办？
+				可以使用TreeSet集合中的第二种排序方式（这种方式实际开发应用的更多）：
+				让集合自身具备比较功能，定义一个类实现Comparator接口，覆盖compare方法。
+				将该类对象作为参数传递给TreeSet集合的构造函数。
+
+
+前缀代表集合所属数据结构
+后缀代表集合所属体系
+
+看到Array 就想到数组结构，其查询速度快。
+看到Linked 想到链表结构，增删速度快。
+看到hash 就想到哈希表，就要想到唯一性，想到元素需要覆盖hashcode 和equals方法
+看到tree 就想到二叉树，想到要排序，想到两个接口Comparable 和 Comparator
+而且通常这些常用集合是不同步的。
+
+
+=========================================================================
+
+Map：双列集合，是无序集合。
+
+常用方法
+		1.添加
+		put(key,value):返回前一个和key关联的value，如果没有返回null。
+		
+		2.删除
+		void clear(); 清空map集合
+		
+		value remove(key) 根据键 删除对应的值。
+		
+		3判断
+		boolean containsKey(key)
+		boolean containsValue(value)
+		boolean isEmpty()
+		
+		4.获取
+		value get(key):通过键获取值，如果没有该键返回null
+		
+		int size();返回该map集合的个数。
+		
+Map常用的子类：
+	|--Hashtable:内部结构是哈希表，同步的。不允许null值作为键，null作为值。
+		|-Properties：用来存储键值对型的配置文件的信息。可以IO流技术相结合。
+	|--HashMap：内部结构是哈希表，不同步。允许null值作为键，null作为值。
+	|--TreeMap：内部结构是二叉树，不同步。可以对Map集合中的键进行排序。
+	
+	
+---------------------------------------------------------------
+泛型
+	jdk1.5出现安全机制。
+	
+好处：
+	1，将运行时期的问题ClassCastExceptions转到编译时期。
+	2，避免了强制转换的麻烦7
+	
+<>:什么时候用？当操作的引用数据类型不确定的时候。就是使用<>泛型。将要操作的引用数据传入即可。	
+其实<>就是一个用于接受具体引用数据类型的参数范围。
+
+泛型技术是给编译器使用的技术，用于编译时期的技术。
+
+运行时，会将泛型去掉，生成的class文件中是不带泛型的。这被称为泛型的擦除。 
+
+为什么擦除呢？  是为了兼容类加载器。
+
+
+泛型通配符： ？
+ 泛型可以对类型 进行限定
+ 
+? extends E : 接受E 类的子类或 E类 对象。上限
+? super   E:  接受E 类的父类或 E类 对象。下限
+
+ 一般在存储元素时 使用上限，因为这样取出数据都是按照上限类型运算的，不会出现安全问题。
+ 
+ ===============================================================
+ 
+ 集合的一些技巧：
+ 
+ 需要唯一吗？
+ 需要：set
+ 	需要制定顺序？
+ 			需要：TreeSet
+ 			不需要：HashSet
+ 			但是想要一个和存储一致的顺序（有序）：LinkedHashSet
+
+不需要：List
+	需要频繁增删吗？
+		需要：LinkedList	
+		不需要：ArrayList
+
+如何记住每一个容器的结构呢和所属体系呢？
+
+看名字！！
+
+List
+	|--ArrayList	
+	|--LinkedList
+	
+Set
+	|--HashSet
+	|--TreeSet      按照特定方式排序
+
+后缀名就是该集合所属的体系
+	
+前缀名就是该集合的数据结构
+看到array：就要想到数据，就要想到查询快，有角标。
+看到Link：就要想到链表，就要想到增删快，add get remove+first last 的方法。
+看到Hash：就要想到哈希表，就要想到唯一性，想到元素需要覆盖hashCode 和 equals 方法。
+看到Tree：就要想到二叉树，就要想到排序，就要想到2个接口Comparable，Comparator。
+
+而且通常这些常用的集合都是不同步的。
+
+有序： 指的是存入集合是什么顺序，取出该集合也应该是什么顺序。比如下面 7，3，1，5存入集合hm，那取出该集合也是7，3，1，5
+无序： TreeSet 特点按照指定顺序取出来 和 存入顺序是不一致的，所以这称之为 无序。

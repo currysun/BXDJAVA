@@ -20,7 +20,8 @@ public class StringTest {
 	public static void main(String[] args) {
 		//Á·Ï°1
 	String[] array={"nba","abc","cba","zz","qq"};
-	System.out.println(Arrays.toString(sortArray2(array)));
+	System.out.println("nba".compareTo("abc"));
+	System.out.println(Arrays.toString(sortArray(array)));
 		
 		//Á·Ï°2
 	String nba="nbacurrynbadurantnbagreennba";
