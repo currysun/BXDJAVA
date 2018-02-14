@@ -1,7 +1,6 @@
 package Day17;
 
 
-
 public class Person implements Comparable<Person> {
 	private String Name;
 	private int age;

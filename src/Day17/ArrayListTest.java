@@ -7,13 +7,18 @@ import java.util.List;
 
 public class ArrayListTest {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ClassNotFoundException {
 		// TODO Auto-generated method stub
 		List<Person> aL=new ArrayList<Person>();
 		aL.add(new Person("curry",30)); //add()方法接收的是Object 类型对象，接收Person后，aL该集合存储的是Object对象。
 		aL.add(new Person("thompson",25));
 		aL.add(new Person("durant",30));
 		aL.add(new Person("green",27));
+		
+		Class<?> clazz1=Person.class;
+		Class<?> clazz2=Class.forName("Day17.Person");
+		Person person=new Person();
+		Class<?> clazz3=person.getClass();
 		
 		Collections.sort(aL);
 		Iterator<Person> it=aL.iterator();
